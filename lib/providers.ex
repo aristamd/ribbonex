@@ -1,0 +1,57 @@
+defmodule Ribbonex.Providers do
+  @moduledoc """
+  Welcome to the Provider Endpoints! These endpoints allow you to build new applications leveraging Ribbon Health provider information to find providers, to learn more about a specific provider, and even to book online appointments.
+
+  The endpoints provide information on any provider in the United States, ranging from the basics like location & contact information to granular detailed information like insurances accepted and patient satisfaction.
+
+  A few specific applications of the endpoints include:
+
+  - Search for providers per specific criteria
+  - Recommend providers based on key parameters
+  - Build detailed profiles of specific providers
+  - Find facilities where specific providers practice
+  - Verify a provider's accepted insurances in real-time
+  - Book doctor appointments
+  - Build custom provider directories & networks
+
+  ### Reference
+  [Ribbon Docs](https://ribbon.readme.io/docs/overview-of-the-custom-endpoint)
+  """
+
+  @provider_search_params [
+    address: [
+      type: :string,
+      doc: "String input of an address that will be interpreted and geocoded in real time."
+    ],
+    min_location_confidence: [
+      type: :integer,
+      doc:
+        "Integer input (0-5) of the minimum confidence threshold for returned provider locations."
+    ],
+    specialty_ids: [
+      type: {:list, :string},
+      doc:
+        "Comma separated list of desired specialty uuids. See all providers who specialize in the given specialties."
+    ],
+    fields: [
+      type: {:list, :string},
+      doc: "Fields to include"
+    ],
+    _excl_fields: [
+      type: {:list, :string},
+      doc: "Fields to exclude"
+    ]
+  ]
+
+  def search(params \\ []) do
+    with {:ok, params} <- NimbleOptions.validate(Enum.into(params, []), @provider_search_params) do
+      path = "/v1/custom/providers"
+      Ribbonex.Client.authd_get(path, params: params)
+    end
+  end
+
+  def get_provider(npi) when is_binary(npi) do
+    path = "/v1/custom/providers/" <> npi
+    Ribbonex.Client.authd_get(path)
+  end
+end

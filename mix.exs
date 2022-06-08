@@ -7,7 +7,8 @@ defmodule Ribbonex.MixProject do
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      aliases: aliases()
     ]
   end
 
@@ -21,8 +22,24 @@ defmodule Ribbonex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:finch, "~> 0.11.0"},
+      {:jason, "~> 1.3"},
+      {:ecto, "~> 3.7"},
+      {:nimble_options, "~> 0.4.0"},
+      {:ex_doc, "~> 0.28.3", only: :dev, runtime: false},
+      {:dotenv, "~> 3.1", only: [:dev, :test]},
+      {:bypass, "~> 2.1", only: :test}
+    ]
+  end
+
+  defp aliases do
+    [
+      "deps.install": [
+        "deps.get",
+        "deps.compile",
+        "deps.clean --unused"
+      ],
+      "deps.i": "deps.install"
     ]
   end
 end

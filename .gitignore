@@ -25,3 +25,12 @@ ribbonex-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+.elixir_ls
+
+*.DS_Store
+
+.env
+
+private
+private_notes.md

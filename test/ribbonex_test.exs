@@ -2,7 +2,7 @@ defmodule RibbonexTest do
   use ExUnit.Case
   doctest Ribbonex
 
-  test "greets the world" do
-    assert Ribbonex.hello() == :world
+  test "truth" do
+    assert 1 == 1
   end
 end

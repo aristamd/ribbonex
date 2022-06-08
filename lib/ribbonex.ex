@@ -1,18 +1,16 @@
 defmodule Ribbonex do
-  @moduledoc """
-  Documentation for `Ribbonex`.
-  """
+  defdelegate search_providers(params \\ []),
+    to: Ribbonex.Providers,
+    as: :search
 
-  @doc """
-  Hello world.
+  defdelegate get_provider(npi),
+    to: Ribbonex.Providers
 
-  ## Examples
+  defdelegate search_specialties(params \\ []),
+    to: Ribbonex.Specialties,
+    as: :search
 
-      iex> Ribbonex.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  defdelegate search_insurances(params \\ []),
+    to: Ribbonex.Insurances,
+    as: :search
 end
