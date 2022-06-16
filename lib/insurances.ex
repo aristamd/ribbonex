@@ -5,7 +5,13 @@ defmodule Ribbonex.Insurances do
   [Ribbon Docs](https://ribbon.readme.io/docs/insurances-reference-endpoint)
   """
 
+  def get_insurance(uuid, params \\ []) when is_binary(uuid) do
+    path = "/v1/custom/insurances/#{uuid}"
+    Ribbonex.Client.authd_get(path, params: params)
+  end
+
   @insurances_search_params [
+    page: [type: :non_neg_integer],
     search: [
       type: :string,
       doc: "Fuzzy search across all information within an insurance object."

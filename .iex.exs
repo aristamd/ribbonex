@@ -14,7 +14,7 @@ Supervisor.start_link(children, opts)
 
 defmodule ReplHelpers do
   def search(term) do
-    with {:ok, %{data: %{"results" => results}}} when length(results) > 0 <- Ribbonex.search_insurances(search: term) do
+    with {:ok, %{data: %{"results" => results}}} when results != [] > 0 <- Ribbonex.search_insurances(search: term) do
       results
       |> Enum.sort_by(& &1["confidence"])
       |> Enum.reverse()

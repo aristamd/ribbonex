@@ -19,6 +19,15 @@ defmodule Ribbonex.Providers do
   """
 
   @provider_search_params [
+    page: [type: :non_neg_integer],
+    npi: [
+      type: :string,
+      doc: ""
+    ],
+    name: [
+      type: :string,
+      doc: "String input of a full, first, last, or partial name."
+    ],
     address: [
       type: :string,
       doc: "String input of an address that will be interpreted and geocoded in real time."
@@ -33,13 +42,17 @@ defmodule Ribbonex.Providers do
       doc:
         "Comma separated list of desired specialty uuids. See all providers who specialize in the given specialties."
     ],
+    insurance_ids: [
+      type: {:list, :string},
+      doc: "List of desired insurance uuids. See all providers who accept a given insurance(s)."
+    ],
     fields: [
       type: {:list, :string},
-      doc: "Fields to include"
+      doc: "Fields to include in response."
     ],
     _excl_fields: [
       type: {:list, :string},
-      doc: "Fields to exclude"
+      doc: "Fields to exclude in response."
     ]
   ]
 
@@ -50,8 +63,8 @@ defmodule Ribbonex.Providers do
     end
   end
 
-  def get_provider(npi) when is_binary(npi) do
+  def get_provider(npi, params \\ []) when is_binary(npi) do
     path = "/v1/custom/providers/" <> npi
-    Ribbonex.Client.authd_get(path)
+    Ribbonex.Client.authd_get(path, params: params)
   end
 end

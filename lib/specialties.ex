@@ -16,6 +16,7 @@ defmodule Ribbonex.Specialties do
   """
 
   @specialties_search_params [
+    page: [type: :non_neg_integer],
     search: [
       type: :string,
       doc: "String input for fuzzy matching specialties"
