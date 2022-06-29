@@ -11,6 +11,11 @@ defmodule Ribbonex.Locations do
     ]
   ]
 
+  def get_location(uuid, params \\ []) do
+    path = "/v1/custom/locations/#{uuid}"
+    Ribbonex.Client.authd_get(path, params: params)
+  end
+
   def search(params \\ []) do
     with {:ok, params} <- NimbleOptions.validate(Enum.into(params, []), @location_search_params) do
       path = "/v1/custom/locations"
