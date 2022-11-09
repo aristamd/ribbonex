@@ -54,6 +54,10 @@ defmodule Ribbonex.Providers do
       type: {:list, :string},
       doc: "Fields to exclude in response."
     ]
+    custom_filters: [
+      type: :keyword_list,
+      doc: "Custom provider filters"
+    ]
   ]
 
   def search(params \\ []) do
