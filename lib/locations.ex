@@ -8,7 +8,11 @@ defmodule Ribbonex.Locations do
     fields: [
       type: {:list, :string},
       doc: "Fields to include in response."
-    ]
+    ],
+    clinical_area: [
+      type: :string,
+      doc: "Fuzzy search on clinical area."
+    ],
   ]
 
   def get_location(uuid, params \\ []) do
