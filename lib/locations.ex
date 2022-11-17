@@ -9,6 +9,10 @@ defmodule Ribbonex.Locations do
       type: {:list, :string},
       doc: "Fields to include in response."
     ],
+    address: [
+      type: :string,
+      doc: "String input of an address that will be interpreted and geocoded in real time."
+    ],
     clinical_area: [
       type: :string,
       doc: "Fuzzy search on clinical area."
