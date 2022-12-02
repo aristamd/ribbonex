@@ -46,6 +46,10 @@ defmodule Ribbonex.Providers do
       type: {:list, :string},
       doc: "List of desired insurance uuids. See all providers who accept a given insurance(s)."
     ],
+    location_ids: [
+      type: {:list, :string},
+      doc: "List of desired locations uuids. See all providers who belongs to a given location(s)."
+    ],
     fields: [
       type: {:list, :string},
       doc: "Fields to include in response."
