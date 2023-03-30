@@ -61,12 +61,31 @@ defmodule Ribbonex.Providers do
     custom_filters: [
       type: :keyword_list,
       doc: "Custom provider filters"
+    ],
+    distance: [
+      type: :integer,
+      doc: "Proximity radius of doctors displayed."
+    ],
+    location_within_distance: [
+      type: :boolean,
+      doc: "Set to true to exclude providers' locations that are outside of the search radius"
     ]
   ]
 
   def search(params \\ []) do
     with {:ok, params} <- NimbleOptions.validate(Enum.into(params, []), @provider_search_params) do
       path = "/v1/custom/providers"
+      # Apply custom filters if they're available
+      params =
+        case params[:custom_filters] do
+          nil ->
+            params
+
+          custom_filters ->
+            custom_filters
+            |> Keyword.merge(params)
+            |> Keyword.delete(:custom_filters)
+        end
       Ribbonex.Client.authd_get(path, params: params)
     end
   end
