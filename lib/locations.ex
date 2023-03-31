@@ -17,6 +17,10 @@ defmodule Ribbonex.Locations do
       type: :string,
       doc: "Fuzzy search on clinical area."
     ],
+    distance: [
+      type: :integer,
+      doc: "Proximity radius of doctors displayed."
+    ],
   ]
 
   def get_location(uuid, params \\ []) do
