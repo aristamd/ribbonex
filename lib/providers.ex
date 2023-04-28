@@ -32,7 +32,12 @@ defmodule Ribbonex.Providers do
       type: :string,
       doc: "String input of an address that will be interpreted and geocoded in real time."
     ],
-    min_location_confidence: [
+    distance: [
+      type: :integer,
+      doc:
+        "Integer input (0-50) that shows the proximity radius of doctors displayed."
+    ],
+     min_location_confidence: [
       type: :integer,
       doc:
         "Integer input (0-5) of the minimum confidence threshold for returned provider locations."
